@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package recsys;
+
+service RecommendationService {
+  rpc Recommend(RecommendRequest) returns (RecommendResponse);
+}
+
+message RecommendRequest {
+  string user_id = 1;
+  string device_type = 2;
+  int32 hour_of_day = 3;
+  int32 top_n = 4;
+  int32 retrieval_k = 5;
+}
+
+message RecommendResponse {
+  repeated RecommendedItem items = 1;
+}
+
+message RecommendedItem {
+  string item_id = 1;
+  float score = 2;
+  int32 rank = 3;
+  float ctr_score = 4;
+  float cvr_score = 5;
+}

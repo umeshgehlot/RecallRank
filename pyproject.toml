@@ -1,0 +1,109 @@
+[project]
+name = "recallrank"
+version = "0.1.0"
+description = "RecallRank — Two-Stage Neural Recommendation System"
+requires-python = ">=3.11"
+authors = [{name = "Tanay Sood"}]
+license = {text = "MIT"}
+readme = "README.md"
+
+[project.urls]
+Homepage = "https://github.com/tanaysd/mmoe-recsys"
+Repository = "https://github.com/tanaysd/mmoe-recsys"
+
+[tool.uv.workspace]
+members = [
+    "packages/recsys-common",
+    "packages/recsys-retrieval",
+    "packages/recsys-ranking",
+    "packages/recsys-serving",
+    "packages/recsys-data",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.4",
+    "mypy>=1.10",
+    "mlflow>=2.12",
+    "onnxscript>=0.7",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [
+    "packages/recsys-common/src",
+    "packages/recsys-retrieval/src",
+    "packages/recsys-ranking/src",
+    "packages/recsys-serving/src",
+    "packages/recsys-data/src",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["*_pb2.py", "*_pb2_grpc.py", "*_pb2.pyi"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.coverage.run]
+source = [
+    "packages/recsys-common/src",
+    "packages/recsys-data/src",
+    "packages/recsys-retrieval/src",
+    "packages/recsys-ranking/src",
+    "packages/recsys-serving/src",
+]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.",
+    "if TYPE_CHECKING:",
+    "\\.\\.\\.",
+]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+mypy_path = [
+    "packages/recsys-common/src",
+    "packages/recsys-data/src",
+    "packages/recsys-retrieval/src",
+    "packages/recsys-ranking/src",
+    "packages/recsys-serving/src",
+]
+
+[[tool.mypy.overrides]]
+module = [
+    "faiss",
+    "faiss.*",
+    "onnx",
+    "onnx.*",
+    "onnxruntime",
+    "onnxruntime.*",
+    "mlflow",
+    "mlflow.*",
+    "grpc",
+    "grpc.*",
+    "google.protobuf",
+    "google.protobuf.*",
+    "pyarrow",
+    "pyarrow.*",
+    "yaml",
+    "yaml.*",
+]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "recsys_serving.recsys_pb2",
+    "recsys_serving.recsys_pb2_grpc",
+]
+ignore_errors = true

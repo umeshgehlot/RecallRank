@@ -1,0 +1,14 @@
+epochs: 20
+batch_size: 512
+lr: 0.001
+weight_decay: 0.00001
+patience: 5
+alpha_ctr: 1.0
+alpha_cvr: 1.0
+
+# DCN cross-layers in experts (Pinterest MMOE-DCN architecture)
+# Ref: https://medium.com/pinterest-engineering/gpu-serving-two-tower-models-for-lightweight-ads-engagement-prediction-5a0ffb442f3b
+# Ref: https://medium.com/pinterest-engineering/beyond-two-towers-re-architecting-the-serving-stack-for-next-gen-ads-lightweight-ranking-models-1992f2b76cbb
+# use_dcn: true
+# num_cross_layers: 2
+# dcn_rank: 0

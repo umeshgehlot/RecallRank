@@ -1,0 +1,22 @@
+[project]
+name = "recsys-data"
+version = "0.1.0"
+description = "Synthetic data generation and dataset compilation"
+requires-python = ">=3.11"
+authors = [{name = "Tanay Sood"}]
+license = {text = "MIT"}
+dependencies = [
+    "recsys-common",
+    "pyarrow>=15.0",
+    "numpy>=1.24",
+]
+
+[tool.uv.sources]
+recsys-common = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/recsys_data"]
